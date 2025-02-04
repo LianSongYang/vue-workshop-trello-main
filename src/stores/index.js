@@ -36,6 +36,9 @@ const defaultList = [
   },
 ];
 
+const uid = () =>
+  Math.random().toString(36).substring(2) + Date.now().toString(36);
+
 export const useStore = defineStore("store", () => {
   const lists = ref(defaultList);
 
@@ -44,8 +47,21 @@ export const useStore = defineStore("store", () => {
     card.title = title;
   };
 
+  // 新增任務
+  const addTask = (cardId = "", title = "") => {
+    if (!cardId || !title) return;
+
+    const card = lists.value.find((list) => list.id === cardId);
+    card.tasks.push({
+      id: uid(),
+      title,
+      content: "",
+    });
+  };
+
   return {
     lists,
     updateListTitle,
+    addTask,
   };
 });
