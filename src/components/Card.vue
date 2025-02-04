@@ -9,21 +9,9 @@
     <!-- <textarea class="resize-none overflow-hidden border-none w-full p-1 h-8 block"></textarea> -->
 
     <!-- tasks -->
-    <div
-      class="block my-2 w-full py-2 px-3 bg-white overflow-hidden select-none"
-    >
-      <div class="block font-bold">卡片標題</div>
-      <div class="overflow-hidden text-ellipsis">卡片內容</div>
-    </div>
 
-    <div
-      class="block my-2 w-full py-2 px-3 bg-white overflow-hidden select-none"
-    >
-      <div class="block font-bold">卡片標題</div>
-      <div class="overflow-hidden text-ellipsis">卡片內容</div>
-    </div>
     <!-- tasks -->
-
+    <TaskItem />
     <!-- add new task -->
     <AddNewTask />
     <!-- add new task -->
