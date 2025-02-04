@@ -37,5 +37,15 @@ const defaultList = [
 ];
 
 export const useStore = defineStore("store", () => {
-  return {};
+  const lists = ref(defaultList);
+
+  const updateListTitle = (cardId = "", title = "") => {
+    const card = lists.value.find((list) => list.id === cardId);
+    card.title = title;
+  };
+
+  return {
+    lists,
+    updateListTitle,
+  };
 });
