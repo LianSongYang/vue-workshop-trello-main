@@ -1,7 +1,7 @@
 <script setup>
 import { ref, computed } from "vue";
 import { useStore } from "/src/stores";
-import EditBox from "../components/EditBox.vue";
+import draggable from "vuedraggable";
 
 const store = useStore();
 const list = computed(() => store.lists);
@@ -13,15 +13,21 @@ const currentEditTask = computed(() => store.currentEditTask);
     class="bg-emerald-700 h-[100vh] w-full block overflow-x-auto overflow-y-hidden"
   >
     <div id="board-wrapper" class="h-full w-full p-4 block overflow-auto">
-      <div class="flex flex-row items-start">
-        <!-- card -->
-        <Card v-for="card in list" :key="card.id" v-bind="card" />
-        <!-- card -->
+      <draggable
+        :list="list"
+        group="card"
+        itemKey="id"
+        ghost-class="opacity-30"
+        class="flex flex-row items-start"
+      >
+        <template #item="{ element }">
+          <Card v-bind="element" />
+        </template>
 
-        <!-- add new card -->
-        <AddNewCard />
-        <!-- add new card -->
-      </div>
+        <template #footer>
+          <AddNewCard />
+        </template>
+      </draggable>
     </div>
 
     <!-- lightbox -->
