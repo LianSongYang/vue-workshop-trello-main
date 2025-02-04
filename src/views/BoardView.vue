@@ -31,6 +31,6 @@ const currentEditTask = computed(() => store.currentEditTask);
     </div>
 
     <!-- lightbox -->
-    <EditBox v-if="currentEditTask?.id" />
+    <router-view />
   </div>
 </template>
