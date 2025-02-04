@@ -1,4 +1,4 @@
-import { ref, computed } from "vue";
+import { ref, computed, watch } from "vue";
 import { defineStore } from "pinia";
 
 const defaultList = [
@@ -40,7 +40,18 @@ const uid = () =>
   Math.random().toString(36).substring(2) + Date.now().toString(36);
 
 export const useStore = defineStore("store", () => {
-  const lists = ref(defaultList);
+  const lists = ref(
+    JSON.parse(localStorage.getItem("trello-lists")) || defaultList,
+  );
+
+  watch(
+    lists,
+    (val) => {
+      // 當 list 變動時，將變動後的值存入 localStorage
+      localStorage.setItem("trello-lists", JSON.stringify(val));
+    },
+    { deep: true },
+  );
 
   const updateListTitle = (cardId = "", title = "") => {
     const card = lists.value.find((list) => list.id === cardId);
