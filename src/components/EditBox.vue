@@ -3,7 +3,7 @@ import { ref, computed } from "vue";
 import { useStore } from "/src/stores";
 
 const store = useStore();
-const { closeEditTask, updateTask } = store;
+const { closeEditTask, updateTask, deleteTask } = store;
 const currentEditTask = computed(() => store.currentEditTask);
 
 // 避免直接對 currentEditTask 修改，用 ref 包裝
@@ -35,6 +35,7 @@ const content = ref(currentEditTask.value.content);
 
       <div class="text-right mt-4">
         <button
+          @click="deleteTask(currentEditTask.cardId, currentEditTask.id)"
           class="border bg-rose-500 text-white py-2 px-4 hover:bg-rose-700 mr-6"
         >
           刪除

@@ -86,6 +86,13 @@ export const useStore = defineStore("store", () => {
     closeEditTask();
   };
 
+  // 刪除任務
+  const deleteTask = (cardId, taskId) => {
+    const card = lists.value.find((list) => list.id === cardId);
+    card.tasks = card.tasks.filter((task) => task.id !== taskId);
+    closeEditTask();
+  };
+
   return {
     lists,
     updateListTitle,
@@ -94,5 +101,6 @@ export const useStore = defineStore("store", () => {
     closeEditTask,
     currentEditTask,
     updateTask,
+    deleteTask,
   };
 });
