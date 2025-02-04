@@ -59,9 +59,40 @@ export const useStore = defineStore("store", () => {
     });
   };
 
+  const currentEditTask = ref({});
+
+  // 開啟編輯燈箱
+  const openEditTask = (cardId, taskId) => {
+    const card = lists.value.find((list) => list.id === cardId);
+    const task = card.tasks.find((task) => task.id === taskId);
+
+    // 傳入卡片 id, 及任務資訊
+    currentEditTask.value = {
+      cardId,
+      ...task,
+    };
+  };
+  // 清空 currentEditTask 代表關閉燈箱
+  const closeEditTask = () => {
+    currentEditTask.value = {};
+  };
+
+  // 更新 task 內容
+  const updateTask = (cardId, taskId, title = "", content = "") => {
+    const card = lists.value.find((list) => list.id === cardId);
+    const task = card.tasks.find((task) => task.id === taskId);
+    task.title = title;
+    task.content = content;
+    closeEditTask();
+  };
+
   return {
     lists,
     updateListTitle,
     addTask,
+    openEditTask,
+    closeEditTask,
+    currentEditTask,
+    updateTask,
   };
 });

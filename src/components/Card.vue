@@ -15,7 +15,7 @@ const title = ref(props.title);
 const isTitleEditing = ref(false);
 
 const store = useStore();
-const { updateListTitle } = store;
+const { updateListTitle, openEditTask } = store;
 
 const target = ref();
 useFocus(target, { initialValue: true });
@@ -48,7 +48,12 @@ watch(isTitleEditing, (v) => {
     </textarea>
 
     <!-- tasks -->
-    <TaskItem v-for="task in tasks" :key="task.id" v-bind="task" />
+    <TaskItem
+      v-for="task in tasks"
+      :key="task.id"
+      v-bind="task"
+      @click="openEditTask(props.id, task.id)"
+    />
     <!-- tasks -->
 
     <!-- add new task -->
