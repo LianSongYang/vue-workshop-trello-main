@@ -93,6 +93,17 @@ export const useStore = defineStore("store", () => {
     closeEditTask();
   };
 
+  // 新增卡片
+  const addNewCard = (title = "") => {
+    if (!title) return;
+
+    lists.value.push({
+      id: uid(),
+      title,
+      tasks: [],
+    });
+  };
+
   return {
     lists,
     updateListTitle,
@@ -102,5 +113,6 @@ export const useStore = defineStore("store", () => {
     currentEditTask,
     updateTask,
     deleteTask,
+    addNewCard,
   };
 });
